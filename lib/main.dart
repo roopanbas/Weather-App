@@ -1,8 +1,11 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:weather_app/screens/home_screen.dart';
 
 void main() {
+  DartPluginRegistrant.ensureInitialized();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -18,4 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
