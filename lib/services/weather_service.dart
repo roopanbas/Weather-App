@@ -5,9 +5,8 @@ import 'package:weather_app/utils/api_key.dart';
 
 class WeatherService {
   static Future<Map<String, dynamic>> getCurrentWeather() async {
-    print("stated");
     try {
-      //String cityName = 'Ernakulam,IN';
+      // String cityName = 'Ernakulam,IN';
       Location location = Location();
       await location.getCurrentLocation();
 
@@ -15,20 +14,16 @@ class WeatherService {
           'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitide}&appid=$openWeatherApiKey'));
 
       if (response.statusCode != 200) {
-        throw 'Something went wrong please try again';
-        //  print("response:${response.body}");
-        //print(result.runtimeType);
-
-        // var currentWeather =
-        //     WeatherModel.fromJson(result as Map<String, dynamic>);
-        // weather = currentWeather;
-        // print(currentWeather.clouds);
+        print("Something went wrong");
+        throw Exception("Something went wrong please try again");
       }
+
       final result = jsonDecode(response.body);
-      print(result);
+
       return result;
     } catch (e) {
       throw Exception("Something went wrong ${e.toString()}");
     }
   }
 }
+

@@ -1,14 +1,15 @@
 import 'package:geolocator/geolocator.dart';
 
 class Location {
+  // set a default location
   double latitude = 10.1373217237236;
   double longitide = 76.26944615855534;
 
   Future<void> getCurrentLocation() async {
-    var serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
+    // var serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    // if (!serviceEnabled) {
+    //   return Future.error('Location services are disabled.');
+    // }
     try {
       await Geolocator.checkPermission();
       await Geolocator.requestPermission();

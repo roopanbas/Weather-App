@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/utils/colors.dart';
 
 class AdditionalInfoItem extends StatelessWidget {
-  const AdditionalInfoItem({
-    super.key,
-  });
+  final String value;
+  final IconData icon;
+  final String label;
+  final int angle;
+  final double size;
+  const AdditionalInfoItem(
+      {super.key,
+      required this.value,
+      required this.icon,
+      required this.label,
+      this.angle = 0,
+      this.size = 26});
 
   @override
   Widget build(BuildContext context) {
@@ -12,24 +21,28 @@ class AdditionalInfoItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(
-          Icons.wind_power,
-          color: kWhite,
-        ),
-        SizedBox(
-          height: 10,
-        ),
         Text(
-          "10 m/s",
-          style: TextStyle(
+          value,
+          style:const TextStyle(
               color: kWhite, fontWeight: FontWeight.bold, fontSize: 16),
         ),
         SizedBox(
           height: 10,
         ),
+        Transform.rotate(
+          angle: angle.toDouble(),
+          child: Icon(
+            icon,
+            color: kWhite,
+            size: size,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
         Text(
-          "Wind",
-          style: TextStyle(color: kGrey),
+          label,
+          style:const TextStyle(color: kWhite),
         )
       ],
     );
