@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/bloc/weather_bloc.dart';
+import 'package:weather_app/screens/splash_screen.dart';
 import 'package:weather_app/utils/colors.dart';
 import 'package:weather_app/widgets/additional_info_item.dart';
 import 'package:weather_app/widgets/current_weather_card.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     weatherBloc.add(WeatherFetchEvent());
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: BlocConsumer<WeatherBloc, WeatherState>(
             bloc: weatherBloc,
             buildWhen: (previous, current) => current is! WeatherActionState,
@@ -24,7 +26,7 @@ class HomeScreen extends StatelessWidget {
               switch (state.runtimeType) {
                 case WeatherLoadingState:
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: SplashScreen(),
                   );
 
                 case WeatherErrorState:
@@ -50,24 +52,31 @@ class HomeScreen extends StatelessWidget {
                       data.weather['sys']['sunset'] * 1000);
 
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Weather App",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.010),
                       Container(
                         width: double.infinity,
                         margin: const EdgeInsets.all(10),
                         child: ListTile(
-                          title: Text(data.weather['name']),
+                          title: Text("${data.weather['name']}"),
                           subtitle:
                               Text(DateFormat.yMMMEd().format(DateTime.now())),
                           titleTextStyle: const TextStyle(
-                              color: kWhite,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 26),
-                          subtitleTextStyle: const TextStyle(color: kGrey),
-                          trailing: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.refresh),
-                            color: kGrey,
-                          ),
+                          subtitleTextStyle:
+                              const TextStyle(color: Colors.black),
                         ),
                       ),
                       CurrentWeatherCard(
@@ -87,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             AdditionalInfoItem(
                                 value: visibilityLabel(visibility),
-                                icon: Icons.air,
+                                icon: Icons.visibility,
                                 label: "Visibility"),
                             AdditionalInfoItem(
                                 value: humidity.toString(),
@@ -105,13 +114,15 @@ class HomeScreen extends StatelessWidget {
                           angle: windDirection,
                           clouds: clouds,
                           sunrise: sunrise,
-                          sunset: sunset)
+                          sunset: sunset),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.010),
                     ],
                   );
 
                 default:
                   return const Center(
-                    child: Text("Tap Refresh..."),
+                    child: Text("Something went wrong"),
                   );
               }
             },
@@ -120,7 +131,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  String visibilityLabel(int visibility) {
+  String visibilityLabel(num visibility) {
     if (visibility > 10000) {
       return "Exceptional visibility";
     } else if (visibility > 4000 && visibility <= 10000) {
@@ -144,5 +155,25 @@ class HomeScreen extends StatelessWidget {
     } else {
       return "https://lottie.host/116ed6c1-f4fc-48b9-8fe5-cdf3735fcee8/toUvpUGYUU.json";
     }
+  }
+
+  String getWeatherMessage(String currentSky) {
+    if (currentSky == "Clouds") {
+      return "hi";
+    } else if (currentSky == "Rain") {
+      return "hoi";
+    } else if (currentSky == "Thunderstorm") {
+      return "hello";
+    } else {
+      return "c";
+    }
+  }
+
+  showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container();
+        });
   }
 }

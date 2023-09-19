@@ -2,10 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:weather_app/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
+// NotificationServices().initNotfication();
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
       theme: ThemeData(),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

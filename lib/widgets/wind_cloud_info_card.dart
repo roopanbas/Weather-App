@@ -4,7 +4,7 @@ import 'package:weather_app/utils/colors.dart';
 import 'package:weather_app/widgets/additional_info_item.dart';
 
 class WindCloudInfoCard extends StatelessWidget {
-  final double wind;
+  final num wind;
   final int angle;
   final clouds;
   final sunrise;

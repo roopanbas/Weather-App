@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/utils/colors.dart';
 
 class AdditionalInfoItem extends StatelessWidget {
   final String value;
@@ -24,7 +23,7 @@ class AdditionalInfoItem extends StatelessWidget {
         Text(
           value,
           style:const TextStyle(
-              color: kWhite, fontWeight: FontWeight.bold, fontSize: 16),
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
         ),
         SizedBox(
           height: 10,
@@ -33,7 +32,7 @@ class AdditionalInfoItem extends StatelessWidget {
           angle: angle.toDouble(),
           child: Icon(
             icon,
-            color: kWhite,
+            color: Colors.white,
             size: size,
           ),
         ),
@@ -42,7 +41,7 @@ class AdditionalInfoItem extends StatelessWidget {
         ),
         Text(
           label,
-          style:const TextStyle(color: kWhite),
+          style:const TextStyle(color: Colors.white),
         )
       ],
     );
