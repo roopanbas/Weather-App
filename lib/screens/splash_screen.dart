@@ -11,7 +11,7 @@ class SplashScreen extends StatelessWidget {
         Center(
           child: Text(
             "Weather App",
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
           ),
         ),
         Spacer(),
@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
                 height: 12,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: Colors.grey,
+                  color: Colors.blue,
                 ),
               ),
             ),
@@ -33,7 +33,7 @@ class SplashScreen extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 20,
+          height: 21,
         ),
       ],
     );
